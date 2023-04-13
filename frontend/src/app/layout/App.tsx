@@ -1,11 +1,14 @@
-import { useEffect, useState } from "react";
-import { Product } from "../models/product";
+import { useState } from "react";
 import Catalog from "../../features/catalog/catalog";
-import Typography from '@mui/material/Typography';
 import Header from "./header";
 import CssBaseline from "@mui/material/CssBaseline";
 import Container from "@mui/material/Container";
 import { ThemeProvider, createTheme } from "@mui/material";
+import { Route,  Routes } from "react-router-dom";
+import HomePage from "../../features/home/homePage";
+import ProductDetails from "../../features/catalog/productDetails";
+import AboutPage from "../../features/about/aboutPage";
+import ContactPage from "../../features/contact/contactPage";
 
 function App() {
 
@@ -28,9 +31,15 @@ function App() {
   return (
     <ThemeProvider theme={theme}>
       <CssBaseline />
-      <Header darkMode={darkMode} themeChange={handleThemeChange}/>
+      <Header darkMode={darkMode} themeChange={handleThemeChange} />
       <Container>
-        <Catalog />
+        <Routes>
+          <Route path="/" element={<HomePage/>} />
+          <Route path="/catalog" element={<Catalog/>} />
+          <Route path="/catalog/:id" element={<ProductDetails/>} />
+          <Route path="/about" element={<AboutPage/>} />
+          <Route path="/contact" element={<ContactPage/>} />
+        </Routes>
       </Container>
     </ThemeProvider>
   );
